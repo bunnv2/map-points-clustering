@@ -1,0 +1,17 @@
+{{!< main}}
+
+<div id="map" style="width: 1000px; height: 1000px; border: 5px solid #ffffff; border-radius: 10px;"></div>
+<script>
+    const mapOptions = {
+    center: [51.9189046,19.1343786],
+    zoom: 7,
+    maxZoom: 16,
+    minZoom: 1
+    }
+    
+    const map = new L.map('map', mapOptions);
+    
+    const layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    
+    map.addLayer(layer);
+</script>

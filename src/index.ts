@@ -1,5 +1,6 @@
-import express from 'express';
+import { create } from 'express-handlebars';
 import { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 // routes
 import locationsRouter from './routes/locations';
@@ -9,16 +10,20 @@ dotenv.config();
 const app = express();
 
 const port = process.env.PORT;
-const host = process.env.HOST
 
+const host = process.env.HOST
 
 if (!port && !host) {
     console.log('Please create .env file via command:\x1b[34m npm run create-env \x1b[0m');
     process.exit(1);
 }
 
+const handlebars = create();
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
+
 app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
+    res.render('map')
 });
 
 app.use('/locations', locationsRouter)

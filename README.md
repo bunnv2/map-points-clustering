@@ -11,13 +11,15 @@
 
 ### TODO
 #### PHASE 1 - basic required features [API]
-- [ ] Create model for map points
-- [ ] Create types for map points and requests and responses
-- [ ] Mock data for map points
-- [ ] Create API for map points clustering with K-Means or SuperCluster based on scale
+- [x] Create model for map points
+- [x] Create types for map points and requests and responses
+- [x] Mock data for map points
+- [x] Create API for map points clustering with SuperCluster based on scale
+- [ ] Create API for map points clustering with K-Means
 #### PHASE 2 - optional features [UI and Validation]
 - [ ] Make tests for API
 - [ ] Validate input data and manage errors
-- [ ] Create UI for map points clustering, using Leaflet
+- [x] Create UI for map points clustering, using Leaflet
+- [ ] Send points to UI and show them on map
 - [ ] Zoom in/out to see the difference
 
