@@ -17,16 +17,14 @@
 - [x] Create API for map points clustering with SuperCluster based on scale
 - [ ] Create API for map points clustering with K-Means
 #### PHASE 2 - optional features [UI and Validation]
-- [ ] Make tests for API
+- [x] Make tests for API
 - [ ] Validate input data and manage errors
 - [x] Create UI for map points clustering, using Leaflet
 - [x] Send points to UI and show them on map
 - [x] Zoom in/out to see the difference
 
 #### ADDITIONAL
-- [ ] Add more points
+- [x] Add more points
 - [ ] Refactor types and bounds
-- [ ] Add more tests
-- [ ] Add endpoint for adding new points
-- [ ] Add endpoint for points of given bounds
-- [ ] Add cors
+- [x] Add more tests
+- [x] Add endpoint for adding new points

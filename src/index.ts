@@ -32,3 +32,5 @@ app.use('/locations', locationsRouter)
 app.listen(port, () => {
     console.log(`Server listening at http://${host}:${port}`);
 });
+
+export default app;

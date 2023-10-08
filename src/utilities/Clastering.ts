@@ -1,13 +1,7 @@
-import { Location } from "../models/Location";
-import { readFileSync } from "fs";
-import { Point } from "../types";
-import { Location as LocationModel } from "../models/Location";
 import Supercluster from 'supercluster';
+import { loadPoints } from "./loadPoints";
 
-const path = require('path');
-const locationData : Point[] = JSON.parse(readFileSync(path.resolve(__dirname, '../../data/points.json'), "utf-8"));
-const locations = Array.from(locationData, (point) => new Location(point));
-
+const locations = loadPoints();
 
 export class Clastering {
     static getPoints(zoom:number) {
