@@ -9,14 +9,13 @@ const locationData : Point[] = JSON.parse(readFileSync(path.resolve(__dirname, '
 const locations = Array.from(locationData, (point) => new Location(point));
 
 
-// static class
 export class Clastering {
-    static getPoints(zoom:number) {
+    static getPoints(zoom:number, bounds?: any) {
         const cluster = new Supercluster({
-            radius: 40,
-            maxZoom: 16
+            radius: 50,
+            maxZoom: 19
         });
-
+        const { latitudes, longitudes } = bounds;
         const points: GeoJSON.Feature<GeoJSON.Point, { id: number }>[]
             = locations.map((location, id) => {
                 return {
@@ -30,9 +29,26 @@ export class Clastering {
             });
 
         cluster.load(points);
+        let clusters 
 
-        const clusters = cluster.getClusters([-180, -85, 180, 85], zoom);
-
-        return clusters;
+        if (latitudes && longitudes) clusters = cluster.getClusters([latitudes[0], latitudes[1], longitudes[0], longitudes[1]], zoom);
+        else clusters = cluster.getClusters([-180, -85, 180, 85], zoom);
+        const clusteredPoints = clusters.map((cluster) => {
+            if (cluster.properties.cluster) {
+                return {
+                    longitude: cluster.geometry.coordinates[0],
+                    latitude: cluster.geometry.coordinates[1],
+                    isCluster: true,
+                    point_count: cluster.properties.point_count,
+                }
+             } else {
+                return {
+                    longitude: cluster.geometry.coordinates[0],
+                    latitude: cluster.geometry.coordinates[1],
+                    isCluster: false,
+                };
+            }
+        });
+        return clusteredPoints;
     }
 }

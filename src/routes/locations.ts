@@ -6,10 +6,11 @@ import { Clastering } from '../utilities/Clastering';
 const router = express.Router();
 
 
-// Endpoint do pobierania punktów w zależności od skali mapy
-router.get('/getPoints/:zoom', (req, res) => {
-    const zoom = parseInt(req.params.zoom);
-    const points = Clastering.getPoints(zoom);
+// Get all locations based on zoom and bounds
+router.post('/getPoints/', (req, res) => {
+    const { zoom, bounds } = req.body;
+    const parsedZoom = parseInt(zoom);
+    const points = Clastering.getPoints(parsedZoom, [bounds.latitudes, bounds.longitudes]);
     res.send(points);
 });
 

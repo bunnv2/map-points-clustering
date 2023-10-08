@@ -4,13 +4,14 @@ import express from 'express';
 import dotenv from 'dotenv';
 // routes
 import locationsRouter from './routes/locations';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
 const app = express();
+const handlebars = create();
 
 const port = process.env.PORT;
-
 const host = process.env.HOST
 
 if (!port && !host) {
@@ -18,7 +19,7 @@ if (!port && !host) {
     process.exit(1);
 }
 
-const handlebars = create();
+app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 

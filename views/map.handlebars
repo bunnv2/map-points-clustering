@@ -3,15 +3,69 @@
 <div id="map" style="width: 1000px; height: 1000px; border: 5px solid #ffffff; border-radius: 10px;"></div>
 <script>
     const mapOptions = {
-    center: [51.9189046,19.1343786],
-    zoom: 7,
-    maxZoom: 16,
-    minZoom: 1
+        center: [51.9189046,19.1343786],
+        zoom: 7,
+        worldCopyJump: true,
     }
-    
+
     const map = new L.map('map', mapOptions);
-    
+    map
+
     const layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    
+
     map.addLayer(layer);
+
+    let points = [];
+    let markers = [];
+
+    async function addMarkersToMap() {
+        const zoom = map.getZoom();
+        const bounds = map.getBounds();
+
+        // Get bounds from the map
+        const longitudes = {
+            longitudes: [bounds.getSouthWest().lng, bounds.getNorthEast().lng]
+        };
+        const latitudes = {
+            latitudes: [bounds.getSouthWest().lat, bounds.getNorthEast().lat]
+        };
+
+        try {
+            // Get points from the server
+            points = await fetch(`locations/getPoints/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    zoom: map.getZoom(),
+                    bounds: {
+                        longitudes,
+                        latitudes
+                    }
+                })
+            })
+            const data = await points.json();
+
+            // Remove all previous markers
+            markers.forEach(marker => {
+                map.removeLayer(marker);
+            });
+            markers = [];
+
+            // Add new markers to the map
+            data.forEach(point => {
+                const marker = L.marker([point.latitude, point.longitude]).addTo(map);
+                markers.push(marker);
+            });
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    addMarkersToMap();
+
+    map.on('zoomend', addMarkersToMap);
 </script>
+
