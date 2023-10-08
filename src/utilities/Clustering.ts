@@ -1,10 +1,8 @@
 import Supercluster from 'supercluster';
-import { loadPoints } from "./loadPoints";
-
-const locations = loadPoints();
-
-export class Clastering {
-    static getPoints(zoom:number) {
+import { Location } from '../models/Location';
+import { loadPoints } from './loadPoints';
+export class Clustering {
+    static getPoints(zoom:number, locations = loadPoints()) {
         const cluster = new Supercluster({
             radius: 55,
             maxZoom: 19

@@ -1,6 +1,6 @@
 // routes/locations.js
 import express from 'express';
-import { Clastering } from '../utilities/Clastering';
+import { Clustering } from '../utilities/Clustering';
 import fs from 'fs';
 import path from 'path';
 const router = express.Router();
@@ -34,7 +34,7 @@ function validateZoom(req: Request, res: Response, next: NextFunction) {
 router.post('/getPoints/', validateZoom, (req, res) => {
     const { zoom } = req.body;
     const parsedZoom = parseInt(zoom);
-    const points = Clastering.getPoints(parsedZoom);
+    const points = Clustering.getPoints(parsedZoom);
     res.send(points);
 });
 

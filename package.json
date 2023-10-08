@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf lib && tsc",
     "start": "node lib/index.js",
     "dev": "nodemon src/index.ts",
     "test": "jest",
@@ -12,7 +12,8 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testMatch": ["**/*.test.ts"]
   },
   "keywords": [],
   "author": "",
