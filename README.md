@@ -20,6 +20,6 @@
 - [ ] Make tests for API
 - [ ] Validate input data and manage errors
 - [x] Create UI for map points clustering, using Leaflet
-- [ ] Send points to UI and show them on map
-- [ ] Zoom in/out to see the difference
+- [x] Send points to UI and show them on map
+- [x] Zoom in/out to see the difference
 
