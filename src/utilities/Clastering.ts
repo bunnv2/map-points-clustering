@@ -10,12 +10,11 @@ const locations = Array.from(locationData, (point) => new Location(point));
 
 
 export class Clastering {
-    static getPoints(zoom:number, bounds?: any) {
+    static getPoints(zoom:number) {
         const cluster = new Supercluster({
-            radius: 50,
+            radius: 55,
             maxZoom: 19
         });
-        const { latitudes, longitudes } = bounds;
         const points: GeoJSON.Feature<GeoJSON.Point, { id: number }>[]
             = locations.map((location, id) => {
                 return {
@@ -29,10 +28,8 @@ export class Clastering {
             });
 
         cluster.load(points);
-        let clusters 
+        const clusters = cluster.getClusters([-180, -85, 180, 85], zoom);
 
-        if (latitudes && longitudes) clusters = cluster.getClusters([latitudes[0], latitudes[1], longitudes[0], longitudes[1]], zoom);
-        else clusters = cluster.getClusters([-180, -85, 180, 85], zoom);
         const clusteredPoints = clusters.map((cluster) => {
             if (cluster.properties.cluster) {
                 return {

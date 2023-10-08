@@ -6,11 +6,11 @@ import { Clastering } from '../utilities/Clastering';
 const router = express.Router();
 
 
-// Get all locations based on zoom and bounds
+// Get all locations based on zoom
 router.post('/getPoints/', (req, res) => {
-    const { zoom, bounds } = req.body;
+    const { zoom } = req.body;
     const parsedZoom = parseInt(zoom);
-    const points = Clastering.getPoints(parsedZoom, [bounds.latitudes, bounds.longitudes]);
+    const points = Clastering.getPoints(parsedZoom);
     res.send(points);
 });
 

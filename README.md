@@ -23,3 +23,10 @@
 - [x] Send points to UI and show them on map
 - [x] Zoom in/out to see the difference
 
+#### ADDITIONAL
+- [ ] Add more points
+- [ ] Refactor types and bounds
+- [ ] Add more tests
+- [ ] Add endpoint for adding new points
+- [ ] Add endpoint for points of given bounds
+- [ ] Add cors
