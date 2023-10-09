@@ -4,7 +4,6 @@ const path = require('path');
 // Define the path to the .env file
 const envPath = path.join(__dirname, '..', '.env');
 
-// Define the environment variables
 const envVars = {
     PORT: 3000,
     HOST: 'localhost',

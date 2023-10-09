@@ -1,7 +1,14 @@
 import Supercluster from 'supercluster';
-import { Location } from '../models/Location';
 import { loadPoints } from './loadPoints';
+
 export class Clustering {
+    
+    /**
+     * Returns an array of clustered points based on the given zoom level and locations.
+     * @param zoom - The zoom level to cluster the points.
+     * @param locations - The array of locations to cluster.
+     * @returns An array of clustered points.
+     */
     static getPoints(zoom:number, locations = loadPoints()) {
         const cluster = new Supercluster({
             radius: 55,

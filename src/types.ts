@@ -1,6 +1,6 @@
 export type Point = {
-    longitude: number; // x
-    latitude: number; // y
+    longitude: number;
+    latitude: number;
 };
 
 export interface ILocation {

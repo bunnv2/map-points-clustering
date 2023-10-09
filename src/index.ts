@@ -2,9 +2,9 @@ import { create } from 'express-handlebars';
 import { Request, Response } from 'express';
 import express from 'express';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 // routes
 import locationsRouter from './routes/locations';
-import bodyParser from 'body-parser';
 
 dotenv.config();
 
